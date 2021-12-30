@@ -4,7 +4,7 @@ from aws_cdk import (
     aws_ec2 as ec2
 )
 
-NAME = "CDK"
+NAME = "Development"
 
 class AwsCdkVpcExampleStack(Stack):
 
@@ -20,16 +20,15 @@ class AwsCdkVpcExampleStack(Stack):
                     cidr_mask=24
                 ), ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
-                    name="{}-PrivateSubnet",
+                    name="{}-PrivateSubnet".format(NAME),
                     cidr_mask=24
                 ), ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
-                    name="{}-DBSubnet",
+                    name="{}-DBSubnet".format(NAME),
                     cidr_mask=24
                 )
             ],
-            # nat_gateway_provider=ec2.NatProvider.gateway(),
+            # Default Natgateway configuration, 1 per public subnet.
             nat_gateways=2,
             )
-        # CfnOutput(self, "Output",
-        #         value=self.vpc.vpc_id)
+
